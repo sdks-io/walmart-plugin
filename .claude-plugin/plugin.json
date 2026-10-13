@@ -1,0 +1,16 @@
+{
+  "name": "wm-v4",
+  "displayName": "wm-v4",
+  "version": "0.0.1",
+  "description": "Integrate and consume the APIMatic-generated Walmart APIs SDK — bundled skills for C#/.NET, Python, TypeScript.",
+  "author": {
+    "name": "Moiz Gillani",
+    "email": "moiz.gillani@apimatic.io"
+  },
+  "license": "MIT",
+  "skills": [
+    "./skills/dotnet",
+    "./skills/python",
+    "./skills/typescript"
+  ]
+}
