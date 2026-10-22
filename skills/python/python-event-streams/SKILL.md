@@ -1,6 +1,6 @@
 ---
 name: python-event-streams
-description: Consuming a server-sent-events (text/event-stream) operation on an APIMatic-generated Python SDK — what EventStream[T] / AsyncEventStream[T] yields, how the loop must end so the connection is released, narrowing a union of event types, what raises and when (there is no SSE exception class), the silent failures, and bounding the wait. Load before writing the loop over an operation that returns an event stream, in addition to `python-calling-endpoints`.
+description: Load before writing the loop over an APIMatic-generated Python SDK operation that returns a server-sent-events (text/event-stream) stream, together with `python-calling-endpoints`. Covers what EventStream[T] / AsyncEventStream[T] yields, ending the loop so the connection is released, narrowing event unions, what raises from the loop, and bounding the wait.
 ---
 
 # Event streams on an APIMatic Python SDK
