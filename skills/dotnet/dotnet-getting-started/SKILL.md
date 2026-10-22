@@ -22,7 +22,7 @@ Usage companions: `dotnet-client-initialization`, `dotnet-authentication`, `dotn
 | Client class | `WalmartApIsClient` |
 | Options class | `WalmartApIsClientOptions` |
 | Auth | HTTP **Basic** — set `BasicAuth`<br>**Bearer** token — set `BearerAuth`<br>**API key** in the `WM_SEC.ACCESS_TOKEN` header — set `AccessToken` |
-| Environments | `ServerEnvironment.Production` *(default)* → `https://marketplace.walmartapis.com`<br>`ServerEnvironment.Environment2` → `https://sandbox.walmartapis.com` |
+| Environments | `ServerEnvironment.Production` *(default)* → `https://marketplace.walmartapis.com`<br>`ServerEnvironment.Sandbox` → `https://sandbox.walmartapis.com` |
 | Log environment variable | `WALMARTAPISCLIENT_LOG` |
 | Target framework | `netstandard2.0` (C# `LangVersion 14`) |
 

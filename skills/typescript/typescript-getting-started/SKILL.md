@@ -23,14 +23,14 @@ Verified against `package.json` and `sdk-map.md` of the package at version `1.0.
 | Options type | `ClientOptions` (`src/client-options.ts`) |
 | Client construction | `new WalmartApIsClient(options: ClientOptions = {})` — the argument is optional, as is **every** field on it, so `new WalmartApIsClient()` compiles. Fields: `serverEnvironment` · `serverOptions` · `retry` · `fetch` · `basicAuth` · `bearerAuth` · `accessToken`. `retry` is the `RetryOptions` policy |
 | Auth | **HTTP Basic** — set `ClientOptions.basicAuth`<br>**Bearer token** — set `ClientOptions.bearerAuth`<br>**API key (header)** — set `ClientOptions.accessToken` |
-| Environments | 2 environments (`ServerEnvironment.Production` *(default)*, `ServerEnvironment.Environment2`) × 1 server group |
+| Environments | 2 environments (`ServerEnvironment.Production` *(default)*, `ServerEnvironment.Sandbox`) × 1 server group |
 | Base-URL config | `serverOptions.baseUrl` (`src/servers.ts`), defaulting to `https://marketplace.walmartapis.com` |
 | Log environment variable | `WALMART_AP_IS_CLIENT_LOG` |
 | Node floor | `>=20.3` (`engines.node`) |
 | Runtime dependency | `zod` (`^4.1.0`) — the only one |
 | Module format | dual ESM + CommonJS folder dialects (`dist/esm`, `dist/commonjs`) behind one export |
 | Typing | the package ships its own `.d.ts` — **a type error against this SDK is a real contract violation, not noise** |
-| Surface | 117 operations · 29 resources · 959 models · 188 open enums · 8 unions · 85 per-operation error subclasses |
+| Surface | 117 operations · 29 resources · 960 models · 188 open enums · 8 unions · 85 per-operation error subclasses |
 
 ## Install
 
@@ -46,7 +46,7 @@ Do not vendor its `src/` into your project, point `tsconfig` `paths` at a throwa
 
 ## Imports — one entry, and only one
 
-**Every** public name is re-exported from the package root — the client, `ClientOptions`, `ServerEnvironment`, 1155 model types with the schema value beside each, the error classes, and the runtime types (`ApiPromise`, `ApiResult`, `RequestOptions`, `RetryOptions`, `RequestRetryOptions`, `Declared`, `Undeclared`, `Schema`, `EnumSchema`, `Encoded`).
+**Every** public name is re-exported from the package root — the client, `ClientOptions`, `ServerEnvironment`, 1156 model types with the schema value beside each, the error classes, and the runtime types (`ApiPromise`, `ApiResult`, `RequestOptions`, `RetryOptions`, `RequestRetryOptions`, `Declared`, `Undeclared`, `Schema`, `EnumSchema`, `Encoded`).
 
 ```ts
 import { WalmartApIsClient, ServerEnvironment, ApiError, WalmartApIsError } from "apimatic-wm-v4-sdk";
@@ -76,7 +76,7 @@ Consequences to state on every contract sheet that touches configuration:
 
 ## Auth pattern (3 schemes)
 
-Authentication is **per operation**: every operation declares the requirement it enforces and the SDK sends exactly that. Each block on a map page carries an **Auth** bullet, `none` included. There is no client-global switch and no per-call override. 89 of the 117 operations require a credential and 28 are public.
+Authentication is **per operation**: every operation declares the requirement it enforces and the SDK sends exactly that. Each block on a map page carries an **Auth** bullet, `none` included. There is no client-global switch and no per-call override. 90 of the 117 operations require a credential and 27 are public.
 
 | `ClientOptions` field | Scheme kind | What the SDK sends |
 | --- | --- | --- |
@@ -183,7 +183,7 @@ Before you write the code for each step, load the named companion skill — even
 
 Beyond the usual signatures and model members, a contract sheet for the Walmart APIs TypeScript SDK is incomplete without these, because each one is a decision the implementer cannot make correctly from the signature alone.
 
-1. **Which host each deployment talks to**, and where that is set. The members are `ServerEnvironment.Production`, `ServerEnvironment.Environment2`, defaulting to `ServerEnvironment.Production` when the field is unset.
+1. **Which host each deployment talks to**, and where that is set. The members are `ServerEnvironment.Production`, `ServerEnvironment.Sandbox`, defaulting to `ServerEnvironment.Production` when the field is unset.
 2. **2 operations resolve to `undefined` (`taxFormApIs.downloadTaxForm`, `shipWithWalmart.getLabelByTrackingAndCarrier`)** — `await` gives you nothing to inspect, so **`.asApiResult()` is the only way to observe their status and headers** — decide the mode at write time, not by retrofit.
 3. **The exact request type name per operation**, taken from the **Signature** bullet — 7 operations take `<Operation>RequestParams`, not `<Operation>Request`.
 4. **Every request field with its channel, wire name and default**, because the request object is flat and channel-blind and the SDK fans fields out. An omitted field that has a default is still sent with that default, so a defaulted header shapes the response whether or not the sheet mentions it. Every non-GET operation sends an `Idempotency-Key` header, minted once per call and invisible to you, unless it takes that header as a request field — `typescript-configuration-resilience` has what that key does and does not deduplicate. Any caller-supplied idempotency or request-id field is the only idempotency that spans calls, and `RequestOptions` is `{ signal, retry, logging }` only.

@@ -28,7 +28,7 @@ This page owns the SDK's *identity and surface* (install, imports, controllers, 
 | Python floor | **`>=3.10`** (classifiers list `3.10–3.14`) |
 | Runtime dependencies | `httpx2 (>=2.13.1,<3.0.0)` · `certifi (>=2024.7.4)` · `pydantic[email] (>=2.11.0,<3.0.0)` · `typing-extensions (>=4.13.0,<5.0.0)` |
 | Typing | ships `py.typed` — **a type error against this SDK is a real contract violation, not noise** |
-| Surface | 117 operations across 29 controllers · 959 models · 8 unions · 188 enums · 85 per-operation error unions |
+| Surface | 117 operations across 29 controllers · 960 models · 8 unions · 188 enums · 85 per-operation error unions |
 
 ## Install
 
@@ -83,8 +83,8 @@ The constructor takes an `environment` keyword — a **string literal alias**, n
 
 | `environment=` | Base URL | Hosting |
 | --- | --- | --- |
-| `"production"` *(default)* | `https://marketplace.walmartapis.com` | Production URL, Specifies the production URL., Specifies the production URL., Production URL, Specifies the production URL., Specifies the production URL., Refers to the URL used for accessing the production server., Specifies the production URL., Refers to the URL used for accessing the production server., Production URL, Production URL, Production server for all APIs., Production URL, Production URL, Production URL, Base URL for production requests., Production URL, Production URL, Production URL, Refers to the URL used for accessing the production server |
-| `"environment2"` | `https://sandbox.walmartapis.com` | Sandbox URL, Specifies the sandbox URL., Specifies the sandbox URL., Sandbox URL, Specifies the sandbox URL., Specifies the sandbox URL., Refers to the URL used for accessing the sandbox server., Specifies the sandbox URL., Refers to the URL used for accessing the sandbox server., Sandbox URL, Sandbox URL, Sandbox URL, Sandbox URL, Sandbox URL, Base URL for sandbox requests., Sandbox URL, Sandbox URL, Sandbox URL, Refers to the URL used for accessing the sandbox server |
+| `"production"` *(default)* | `https://marketplace.walmartapis.com` | — |
+| `"sandbox"` | `https://sandbox.walmartapis.com` | — |
 
 Consequences to state on every contract sheet that touches configuration:
 
